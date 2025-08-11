@@ -212,6 +212,12 @@ The CS267 report provided in $CCBENCH/docs is out-of-date, so do not completely
 trust the graphs/results provided in it (but the theory behind the benchmarks
 is still relevant). 
 
+------------------------------------------------------------------------------
+## Udit Updates
+------------------------------------------------------------------------------
+- convert python print style from 2.x to 3.x
+- update .mk configs for Apple Silicon compatibility (clang)
+
 
 ------------------------------------------------------------------------------
 ## TODO

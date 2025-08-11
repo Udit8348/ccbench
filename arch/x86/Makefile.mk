@@ -1,18 +1,18 @@
 ##########################################
 # Architecture-specific Makefile fragment
+# Tailored for Apple Silicon (M1)
 ##########################################
 
-CC=gcc
+# Use Clang (the default gcc on macOS is Clang under the hood)
+CC=clang
 
-# for now, compile common/barrier.* using our own barrier implementations.
-# if your compiler cant handle march, you're using an older version of gcc
-CFLAGS=-std=c99 -mtune=native -march=native -mssse3 -O3 -funroll-loops -I../common -DWITH_BARRIER -Wall
-	
-# OSX users with the older gcc4.2, doesn't support march flag
-ifeq ($(shell gcc -v 2>&1 | tail -n1 | awk '{print $$3}'),4.2.1)
-	CFLAGS=-std=c99 -mtune=native -O3 -funroll-loops -I../common -DWITH_BARRIER -Wall
-endif
+# Stable C99, basic optimizations, common include path, and barrier support
+CFLAGS = \
+    -std=c99 \
+    -O2 \
+    -I../common \
+    -DWITH_BARRIER \
+    -Wall
 
-LD_FLAGS=
-LD_LIBS=-lpthread -lm
- 
+LD_FLAGS =
+LD_LIBS  = -lpthread -lm

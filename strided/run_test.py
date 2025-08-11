@@ -56,7 +56,7 @@ try:
     import pylab
 except:
     NOPLOT = True
-    print "Failure to import {matplotlib/numpy/pylab}. Graphing turned off."
+    print ("Failure to import {matplotlib/numpy/pylab}. Graphing turned off.")
 
 
 # 1. Parses input file.
@@ -105,7 +105,7 @@ def main():
     fig = plt.figure(figsize=(10,5.5))
     p1 = fig.add_subplot(1,1,1)
 
-    print "Plotting time..."
+    print ("Plotting time...")
     num_datapoints = int(data["NumDataPointsPerSet"][0])
  
     # let's convert "appsizearg(#elm)" to "appsize(KB)"
@@ -159,7 +159,7 @@ def main():
 
          
     # legend 
-    print "Adding Legend..."
+    print( "Adding Legend...")
     colors =('b','g','r','c','m','y','k')
     legend_sz = len(data["AppSize"])/num_datapoints
     lines = []

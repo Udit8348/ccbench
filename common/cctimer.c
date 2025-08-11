@@ -6,6 +6,8 @@
 // Abstract out the timer code from each micro-benchmark.
 
 #include "cctimer.h"
+#include <sys/time.h>
+
               
 // ignore input "clk_freq", as we do not need it to 
 // return the time in seconds

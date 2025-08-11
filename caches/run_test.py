@@ -57,7 +57,7 @@ try:
     import pylab
 except:
     NOPLOT = True
-    print "Failure to import {matplotlib/numpy/pylab}. Graphing turned off."
+    print("Failure to import {matplotlib/numpy/pylab}. Graphing turned off.")
 
 # pretty-print out the access latency at various levels in the memory hierarchy
 # input "size" (in kB) 
@@ -80,11 +80,11 @@ def outputAccessLatency(data, size, memstring, freq):
     cycles = float(time_ns) * freq
     # pretty print kB vs MB
     if (float(data["AppSize"][closest_idx]) > 1000):
-        print "  %s Access Latency =  %s ns @(%3g MB), %3.2f cycles" % \
-            (memstring, data["Time"][closest_idx], float(data["AppSize"][closest_idx])/1024, cycles)   
+        print("  %s Access Latency =  %s ns @(%3g MB), %3.2f cycles" % \
+            (memstring, data["Time"][closest_idx], float(data["AppSize"][closest_idx])/1024, cycles))   
     else:
-        print "  %s Access Latency =  %s ns @(%3g kB), %3.2f cycles" % \
-            (memstring, data["Time"][closest_idx], float(data["AppSize"][closest_idx]), cycles)   
+        print("  %s Access Latency =  %s ns @(%3g kB), %3.2f cycles" % \
+            (memstring, data["Time"][closest_idx], float(data["AppSize"][closest_idx]), cycles))   
     
 
 # 1. Parses input file.
@@ -104,7 +104,7 @@ def main():
     if (not ccbench.NORUN):
         inputs = ccbench.parseInputFile(input_filename, variables, ccbench.INPUT_TYPE)
         inputs["NumDataPointsPerSet"] = []
-        inputs["NumDataPointsPerSet"].append(str(len(inputs["AppSize"])))
+        inputs["NumDataPointsPerSet"].append(str(len(inputs["AppSize"])) )
 
         # Build up the arguments list for each invocation of the benchmark.
         # This is done here, instead of in ccbench.py, because this is custom to each app.
@@ -125,8 +125,6 @@ def main():
 
     
     # 4. Plot the Data
-    #print data
-    
     if NOPLOT:
         return
 
@@ -143,7 +141,7 @@ def main():
     
     p1 = fig.add_subplot(1,1,1)
 
-    print "Plotting time..."
+    print("Plotting time...")
     num_datapoints = int(data["NumDataPointsPerSet"][0])
  
     # let's convert "appsizearg(#elm)" to "appsize(KB)"
@@ -151,7 +149,7 @@ def main():
         data["AppSize"][i] = str(float(data["AppSize"][i]) * 4 / 1024)
     
     
-    for i in range(len(data["AppSize"])/num_datapoints):
+    for i in range(len(data["AppSize"])//num_datapoints):
         srt_idx = i*num_datapoints
         end_idx = (i+1)*num_datapoints
         p1.plot(
@@ -166,6 +164,9 @@ def main():
     plt.ylabel(data["TimeUnits"][0])
     plt.xlabel('Array Size')
     plt.ylim((1, 320))
+    
+    xmin,xmax=plt.xlim()
+    plt.xlim((0.5, 1024*64))
     
     xmin,xmax=plt.xlim()
     plt.xlim((0.5, 1024*64))
@@ -195,7 +196,7 @@ def main():
     plt.xticks(
         xtick_range,
         xtick_names,
-        rotation='-30',
+        rotation=-30,
         size='small' 
         )
     plt.yticks(ytick_range,ytick_names)
@@ -206,7 +207,7 @@ def main():
     ccprocstats.plotCacheSizeLines(plt, p1, ccbench.PROCESSOR, ylow, yhigh)
 
     # customize figure title and other doodads based on the processor the test was run on
-    print " ";
+    print(" ");
     if (ccbench.PROCESSOR == "merom"):
         outputAccessLatency(data,     8, "L1      ", 2.33);
         outputAccessLatency(data,    64, "L2      ", 2.33);
@@ -263,12 +264,12 @@ def main():
         outputAccessLatency(data,262144, "DRAM    ", 3.4);
     else:
         plt.title("Cache Hierarchy" + r'', fontstyle='italic')
-        print "  Unknown processor - cycle count is assuming a 1 GHz clock"
+        print( "  Unknown processor - cycle count is assuming a 1 GHz clock")
         outputAccessLatency(data,     8, "", 1.0);
         outputAccessLatency(data,    64, "", 1.0);
         outputAccessLatency(data,  1024, "", 1.0);
         outputAccessLatency(data, 16384, "", 1.0);
-    print " ";
+    print(" ");
 
     if (ccbench.PLOT_FILENAME == "none"):
         filename = PLOT_DIR + ccbench.generatePlotFileName(APP)
@@ -282,8 +283,8 @@ def main():
         filename = os.path.splitext(filename)[0]
         
     plt.savefig(filename)
-    print "Used report filename             : " + report_filename 
-    print "Finished Plotting, saved as file : " + filename + ".pdf"
+    print("Used report filename             : " + report_filename )
+    print("Finished Plotting, saved as file : " + filename + ".pdf")
 
 
 

@@ -69,7 +69,7 @@ try:
     import pylab
 except:
     NOPLOT = True
-    print "Failure to import {matplotlib/numpy/pylab}. Graphing turned off."
+    print ("Failure to import {matplotlib/numpy/pylab}. Graphing turned off.")
 
 
 # 1. Parses input file.
@@ -122,7 +122,7 @@ def main():
     p2 = fig.add_subplot(1,2,2)
     p1 = fig.add_subplot(1,2,1)
 
-    print "Plotting time..."
+    print ("Plotting time...")
     num_datapoints = int(data["NumDataPointsPerSet"][0])
  
     # let's convert "appsizearg(#elm)" to "appsize(KB)"
@@ -136,7 +136,7 @@ def main():
     xtick_names = ['1 kB','4 kB','16 kB','64 kB','256 kB','1 MB','4 MB','16 MB'] 
 
     xmin,xmax = plt.xlim()
-    print "xmax = %d" % (xmax)
+    print ("xmax = %d" % (xmax))
 
 #    if (xmax >= 1024*32):
 #    xtick_range = [1,2,4,8,16,32,64, 128,256, 512,1024,2048,4096,4096*2, 16384,16384*2,16384*4,1024*128]
@@ -287,8 +287,8 @@ def main():
         filename = os.path.splitext(filename)[0]
         
     plt.savefig(filename)
-    print "Used report filename             : " + report_filename 
-    print "Finished Plotting, saved as file : " + filename + ".pdf"
+    print ("Used report filename             : " + report_filename )
+    print ("Finished Plotting, saved as file : " + filename + ".pdf")
  
 
 

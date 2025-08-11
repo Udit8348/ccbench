@@ -67,7 +67,7 @@ try:
     import pylab
 except:
     NOPLOT = True
-    print "Failure to import {matplotlib/numpy/pylab}. Graphing turned off."
+    print ("Failure to import {matplotlib/numpy/pylab}. Graphing turned off.")
 
 
 # 1. Parses input file.
@@ -125,7 +125,7 @@ def main():
 
     p1 = fig.add_subplot(1,1,1)
 
-    print "Plotting time..."
+    print ("Plotting time...")
     num_datapoints = int(data["NumDataPointsPerSet"][0])
  
     # let's convert "appsizearg(#elm)" to "appsize(KB)"
@@ -160,7 +160,7 @@ def main():
     plt.ylabel(data["BandwidthUnits"][0])
     plt.xlabel('Array Size')
     ymin, ymax = plt.ylim()
-    print "ymax = %f" % ymax
+    print ("ymax = %f" % ymax)
     if (ccbench.PROCESSOR == "tegra2" or ccbench.ARCHITECTURE == "arm" or ccbench.ARCHITECTURE == "riscv"):
         plt.ylim((0.0, ymax))
     else:
@@ -224,8 +224,8 @@ def main():
  
         
     plt.savefig(filename)
-    print "Used report filename             : " + report_filename 
-    print "Finished Plotting, saved as file : " + filename + ".pdf"
+    print ("Used report filename             : " + report_filename)
+    print ("Finished Plotting, saved as file : " + filename + ".pdf")
                 
                 
 #This idiom means the below code only runs when executed from the command line
